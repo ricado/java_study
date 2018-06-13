@@ -12,6 +12,8 @@ public class StrategyTest {
 
         ColorStrategy colorStrategy = ColorEnum.GREEN.newInstance();
 
+        Enum.valueOf(ColorEnum.class,"RED");
+
         ColorEnum.valueOf("RED").newInstance();
 
         colorStrategy.print();

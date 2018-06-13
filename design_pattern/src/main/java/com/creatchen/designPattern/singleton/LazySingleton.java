@@ -15,12 +15,12 @@ public class LazySingleton {
 
     private int i = 0;
 
-    private static class  LazyHolder{
-        private static final LazySingleton lazy = new LazySingleton();
-    }
+//    private static class  LazyHolder{
+//        private static final LazySingleton lazy = new LazySingleton();
+//    }
 
     private LazySingleton() {
-        System.out.println("lazySingleton");
+        System.out.println("lazySingleton....");
     }
 
     /**
@@ -35,6 +35,10 @@ public class LazySingleton {
         return lazySingleton;
     }
 
+    /**
+     * 线程安全写法 synchronized
+     * @return
+     */
     public static synchronized LazySingleton getInstance2() {
         if (null == lazySingleton) {
             lazySingleton = new LazySingleton();
@@ -53,17 +57,17 @@ public class LazySingleton {
         return lazySingleton;
     }
 
-    public static LazySingleton getInstance4(){
-//        System.out.println("lazySingleton test");
-        return LazyHolder.lazy;
-    }
+//    public static LazySingleton getInstance4(){
+////        System.out.println("lazySingleton test");
+//        return LazyHolder.lazy;
+//    }
 
     public static void main(String[] args) {
-        int size = 100;
-        ExecutorService executorService = Executors.newScheduledThreadPool(size);
+        int size = 1;
+        ExecutorService executorService = Executors.newScheduledThreadPool(1000);
 
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < size * 1000; i++) {
+        for (int i = 0; i < 1000; i++) {
 //            executorService.submit(() -> LazySingleton.getInstance1().print());
             executorService.submit(() -> LazySingleton.getInstance1());
         }
